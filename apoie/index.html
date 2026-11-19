@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vitro · Support the creator</title>
+    <meta name="description" content="Vitro apps are made by an independent developer. Support is optional and unlocks nothing extra.">
+    <link rel="icon" href="icones/suite.png">
+    <style>
+        :root {
+            color-scheme: light dark;
+            --fundo: #eef1f8;
+            --mancha-1: #8ab4ff;
+            --mancha-2: #ff9ec4;
+            --mancha-3: #b9a2ff;
+            --cartao: rgb(255 255 255 / 0.62);
+            --cartao-aro: rgb(255 255 255 / 0.9);
+            --forma: rgb(255 255 255 / 0.6);
+            --linha: rgb(0 0 0 / 0.08);
+            --texto: #1d1d1f;
+            --texto-suave: rgb(29 29 31 / 0.66);
+            --texto-fraco: rgb(29 29 31 / 0.45);
+            --coracao: #ff2d55;
+            --acento: #007aff;
+            --sombra: 0 24px 60px rgb(40 50 90 / 0.18);
+            --fonte: 'Segoe UI Variable Text', 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            --fonte-titulo: 'Segoe UI Variable Display', 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --fundo: #0e0f15;
+                --mancha-1: #1f4fd1;
+                --mancha-2: #b0245c;
+                --mancha-3: #5b33c9;
+                --cartao: rgb(30 31 38 / 0.62);
+                --cartao-aro: rgb(255 255 255 / 0.14);
+                --forma: rgb(255 255 255 / 0.06);
+                --linha: rgb(255 255 255 / 0.1);
+                --texto: #f5f5f7;
+                --texto-suave: rgb(245 245 247 / 0.7);
+                --texto-fraco: rgb(245 245 247 / 0.45);
+                --coracao: #ff375f;
+                --acento: #0a84ff;
+                --sombra: 0 24px 60px rgb(0 0 0 / 0.45);
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+
+        body {
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr);
+            place-items: center;
+            padding: 40px 16px 32px;
+            background: var(--fundo);
+            color: var(--texto);
+            font: 15px/1.5 var(--fonte);
+            overflow-x: hidden;
+        }
+
+        .fundo {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+
+            span {
+                position: absolute;
+                width: 46vmax;
+                height: 46vmax;
+                border-radius: 50%;
+                filter: blur(80px);
+                opacity: 0.55;
+            }
+
+            span:nth-child(1) { top: -14vmax; left: -10vmax; background: var(--mancha-1); }
+            span:nth-child(2) { bottom: -18vmax; right: -12vmax; background: var(--mancha-2); }
+            span:nth-child(3) { top: 30%; left: 55%; width: 30vmax; height: 30vmax; background: var(--mancha-3); opacity: 0.4; }
+        }
+
+        main {
+            width: min(460px, 100%);
+            padding: 32px 26px 24px;
+            border-radius: 32px;
+            background: var(--cartao);
+            backdrop-filter: blur(28px) saturate(170%);
+            -webkit-backdrop-filter: blur(28px) saturate(170%);
+            box-shadow: inset 0 1px 0 var(--cartao-aro), inset 0 0 0 1px var(--linha), var(--sombra);
+            text-align: center;
+        }
+
+        .icone {
+            display: block;
+            width: 84px;
+            height: 84px;
+            margin: 0 auto 14px;
+            filter: drop-shadow(0 10px 18px rgb(0 0 0 / 0.2));
+        }
+
+        .obrigado {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--texto-suave);
+        }
+
+        h1 {
+            margin-top: 2px;
+            font: 700 28px/1.2 var(--fonte-titulo);
+            letter-spacing: -0.01em;
+
+            svg {
+                width: 24px;
+                height: 24px;
+                margin-left: 6px;
+                vertical-align: -2px;
+                fill: var(--coracao);
+            }
+        }
+
+        .texto {
+            margin-top: 12px;
+            color: var(--texto-suave);
+        }
+
+        .formas {
+            display: grid;
+            gap: 12px;
+            margin-top: 22px;
+        }
+
+        .forma {
+            padding: 18px;
+            border-radius: 22px;
+            background: var(--forma);
+            box-shadow: inset 0 0 0 1px var(--linha);
+
+            h2 {
+                font: 650 16px/1.3 var(--fonte-titulo);
+            }
+
+            p {
+                margin-top: 4px;
+                font-size: 13px;
+                color: var(--texto-suave);
+            }
+        }
+
+        .qr {
+            width: 196px;
+            margin: 14px auto 12px;
+            padding: 12px;
+            border-radius: 18px;
+            background: #ffffff;
+            box-shadow: 0 6px 18px rgb(0 0 0 / 0.1);
+
+            svg {
+                display: block;
+                width: 100%;
+                height: auto;
+            }
+        }
+
+        .botoes {
+            display: grid;
+            gap: 8px;
+            margin-top: 14px;
+        }
+
+        .botao {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 44px;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 999px;
+            background: var(--cor, var(--acento));
+            color: #ffffff;
+            font: 650 15px/1.2 var(--fonte);
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.3), 0 8px 18px color-mix(in srgb, var(--cor, var(--acento)) 30%, transparent);
+            transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1), filter 160ms;
+
+            &:hover {
+                filter: brightness(1.07);
+                transform: scale(1.02);
+            }
+
+            &:active {
+                transform: scale(0.97);
+            }
+
+            &:focus-visible {
+                outline: 3px solid color-mix(in srgb, var(--cor, var(--acento)) 45%, transparent);
+                outline-offset: 2px;
+            }
+        }
+
+        .botao-pix { --cor: #32bcad; }
+        .botao-kofi { --cor: #ff5e5b; }
+        .botao-paypal { --cor: #0070ba; }
+
+        .botao-pix.copiado {
+            --cor: #2fa84f;
+        }
+
+        .vazio {
+            padding: 18px;
+            border-radius: 22px;
+            background: var(--forma);
+            color: var(--texto-suave);
+        }
+
+        .nota {
+            margin-top: 18px;
+            font-size: 13px;
+            color: var(--texto-fraco);
+        }
+
+        footer {
+            width: min(460px, 100%);
+            margin-top: 16px;
+            font-size: 12px;
+            text-align: center;
+            color: var(--texto-fraco);
+        }
+
+        .pagina {
+            display: grid;
+            justify-items: center;
+            width: 100%;
+        }
+
+        @media (max-width: 400px) {
+            main {
+                padding: 26px 18px 20px;
+                border-radius: 26px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .botao {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fundo" aria-hidden="true"><span></span><span></span><span></span></div>
+
+    <div class="pagina">
+        <main>
+            <img class="icone" id="icone" src="icones/suite.png" alt="" width="84" height="84">
+            <p class="obrigado" id="obrigado"></p>
+            <h1><span data-t="titulo"></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.6C6.3 16.4 3 13.2 3 9.4 3 6.6 5.1 4.5 7.8 4.5c1.7 0 3.2.9 4.2 2.3 1-1.4 2.5-2.3 4.2-2.3 2.7 0 4.8 2.1 4.8 4.9 0 3.8-3.3 7-9 11.2z"/></svg></h1>
+            <p class="texto" data-t="texto"></p>
+
+            <div class="formas" id="formas">
+                <section class="forma" id="forma-pix" hidden>
+                    <h2 id="titulo-pix"></h2>
+                    <p data-t="pixTexto"></p>
+                    <div class="qr" id="qr" role="img" aria-label="QR Code Pix"></div>
+                    <div class="botoes">
+                        <button type="button" class="botao botao-pix" id="copiar-pix" data-t="copiar"></button>
+                    </div>
+                </section>
+
+                <section class="forma" id="forma-cartao" hidden>
+                    <h2 data-t="cartao"></h2>
+                    <div class="botoes">
+                        <a class="botao botao-kofi" id="link-kofi" data-t="kofi" rel="noopener" hidden></a>
+                        <a class="botao botao-paypal" id="link-paypal" data-t="paypal" rel="noopener" hidden></a>
+                    </div>
+                </section>
+
+                <p class="vazio" id="vazio" data-t="vazio" hidden></p>
+            </div>
+
+            <p class="nota" data-t="nota"></p>
+        </main>
+        <footer data-t="rodape"></footer>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="qrcode.js"></script>
+    <script>
+        (() => {
+            const TEXTOS = {
+                'pt-BR': {
+                    pagina: 'Apoie o criador',
+                    titulo: 'Apoie o criador',
+                    obrigadoApp: 'Obrigado por usar o {app}!',
+                    obrigado: 'Obrigado por usar o Vitro!',
+                    texto: 'Os apps Vitro são feitos por um desenvolvedor independente, sem anúncios e sem coletar seus dados. Se eles ajudam no seu dia, qualquer valor ajuda a manter e melhorar o projeto.',
+                    nota: 'O apoio é opcional e não libera nada a mais: o app é igual para todos.',
+                    pix: 'Pix',
+                    pixFora: 'No Brasil? Use Pix',
+                    pixTexto: 'Escaneie com o app do banco ou copie o código. Você escolhe o valor.',
+                    copiar: 'Copiar código Pix',
+                    copiado: 'Código copiado',
+                    cartao: 'Cartão ou PayPal',
+                    kofi: 'Apoiar no Ko-fi',
+                    paypal: 'Apoiar pelo PayPal',
+                    vazio: 'As formas de apoio ainda estão sendo configuradas. Volte em breve!',
+                    rodape: 'O pagamento é feito no app do seu banco, no Ko-fi ou no PayPal.'
+                },
+                en: {
+                    pagina: 'Support the creator',
+                    titulo: 'Support the creator',
+                    obrigadoApp: 'Thanks for using {app}!',
+                    obrigado: 'Thanks for using Vitro!',
+                    texto: 'Vitro apps are made by an independent developer, with no ads and no data collection. If they help your day, any amount helps keep the project going and growing.',
+                    nota: 'Support is optional and unlocks nothing extra: the app is the same for everyone.',
+                    pix: 'Pix',
+                    pixFora: 'In Brazil? Use Pix',
+                    pixTexto: 'Scan it with your bank app or copy the code. You choose the amount.',
+                    copiar: 'Copy Pix code',
+                    copiado: 'Code copied',
+                    cartao: 'Card or PayPal',
+                    kofi: 'Support on Ko-fi',
+                    paypal: 'Support with PayPal',
+                    vazio: 'Ways to support are still being set up. Check back soon!',
+                    rodape: 'Payment happens in your bank app, on Ko-fi or on PayPal.'
+                },
+                es: {
+                    pagina: 'Apoya al creador',
+                    titulo: 'Apoya al creador',
+                    obrigadoApp: '¡Gracias por usar {app}!',
+                    obrigado: '¡Gracias por usar Vitro!',
+                    texto: 'Las apps Vitro las hace un desarrollador independiente, sin anuncios y sin recopilar tus datos. Si te ayudan en tu día, cualquier cantidad ayuda a mantener y mejorar el proyecto.',
+                    nota: 'El apoyo es opcional y no desbloquea nada extra: la app es igual para todos.',
+                    pix: 'Pix',
+                    pixFora: '¿En Brasil? Usa Pix',
+                    pixTexto: 'Escanéalo con la app de tu banco o copia el código. Tú eliges la cantidad.',
+                    copiar: 'Copiar código Pix',
+                    copiado: 'Código copiado',
+                    cartao: 'Tarjeta o PayPal',
+                    kofi: 'Apoyar en Ko-fi',
+                    paypal: 'Apoyar con PayPal',
+                    vazio: 'Las formas de apoyo aún se están configurando. ¡Vuelve pronto!',
+                    rodape: 'El pago se hace en la app de tu banco, en Ko-fi o en PayPal.'
+                },
+                fr: {
+                    pagina: 'Soutenir le créateur',
+                    titulo: 'Soutenir le créateur',
+                    obrigadoApp: 'Merci d’utiliser {app} !',
+                    obrigado: 'Merci d’utiliser Vitro !',
+                    texto: 'Les apps Vitro sont créées par un développeur indépendant, sans publicité et sans collecte de données. Si elles vous aident au quotidien, chaque contribution aide à faire vivre et à améliorer le projet.',
+                    nota: 'Le soutien est facultatif et ne débloque rien de plus : l’app est la même pour tout le monde.',
+                    pix: 'Pix',
+                    pixFora: 'Au Brésil ? Utilisez Pix',
+                    pixTexto: 'Scannez avec l’app de votre banque ou copiez le code. Vous choisissez le montant.',
+                    copiar: 'Copier le code Pix',
+                    copiado: 'Code copié',
+                    cartao: 'Carte ou PayPal',
+                    kofi: 'Soutenir sur Ko-fi',
+                    paypal: 'Soutenir avec PayPal',
+                    vazio: 'Les moyens de soutien sont en cours de configuration. Revenez bientôt !',
+                    rodape: 'Le paiement se fait dans l’app de votre banque, sur Ko-fi ou sur PayPal.'
+                },
+                de: {
+                    pagina: 'Den Entwickler unterstützen',
+                    titulo: 'Den Entwickler unterstützen',
+                    obrigadoApp: 'Danke, dass du {app} nutzt!',
+                    obrigado: 'Danke, dass du Vitro nutzt!',
+                    texto: 'Vitro-Apps stammen von einem unabhängigen Entwickler, ohne Werbung und ohne Datensammlung. Wenn sie dir im Alltag helfen, hilft jeder Betrag, das Projekt am Leben zu halten und zu verbessern.',
+                    nota: 'Die Unterstützung ist freiwillig und schaltet nichts frei: Die App ist für alle gleich.',
+                    pix: 'Pix',
+                    pixFora: 'In Brasilien? Nutze Pix',
+                    pixTexto: 'Scanne den Code mit deiner Banking-App oder kopiere ihn. Den Betrag wählst du.',
+                    copiar: 'Pix-Code kopieren',
+                    copiado: 'Code kopiert',
+                    cartao: 'Karte oder PayPal',
+                    kofi: 'Auf Ko-fi unterstützen',
+                    paypal: 'Mit PayPal unterstützen',
+                    vazio: 'Die Unterstützungswege werden gerade eingerichtet. Schau bald wieder vorbei!',
+                    rodape: 'Die Zahlung läuft über deine Banking-App, Ko-fi oder PayPal.'
+                },
+                it: {
+                    pagina: 'Sostieni il creatore',
+                    titulo: 'Sostieni il creatore',
+                    obrigadoApp: 'Grazie per usare {app}!',
+                    obrigado: 'Grazie per usare Vitro!',
+                    texto: 'Le app Vitro sono create da uno sviluppatore indipendente, senza pubblicità e senza raccogliere i tuoi dati. Se ti semplificano la giornata, qualsiasi importo aiuta a mantenere e migliorare il progetto.',
+                    nota: 'Il sostegno è facoltativo e non sblocca nulla in più: l’app è uguale per tutti.',
+                    pix: 'Pix',
+                    pixFora: 'In Brasile? Usa Pix',
+                    pixTexto: 'Inquadralo con l’app della tua banca o copia il codice. L’importo lo scegli tu.',
+                    copiar: 'Copia codice Pix',
+                    copiado: 'Codice copiato',
+                    cartao: 'Carta o PayPal',
+                    kofi: 'Sostieni su Ko-fi',
+                    paypal: 'Sostieni con PayPal',
+                    vazio: 'I metodi di sostegno sono ancora in configurazione. Torna presto!',
+                    rodape: 'Il pagamento avviene nell’app della tua banca, su Ko-fi o su PayPal.'
+                },
+                ja: {
+                    pagina: '作者を応援する',
+                    titulo: '作者を応援する',
+                    obrigadoApp: '{app} をご利用いただきありがとうございます！',
+                    obrigado: 'Vitro をご利用いただきありがとうございます！',
+                    texto: 'Vitro のアプリは個人の開発者が、広告なし・データ収集なしで作っています。毎日の役に立っているなら、どんな金額でもプロジェクトの継続と改善の力になります。',
+                    nota: '応援は任意で、何かが解放されることはありません。アプリの内容は誰にとっても同じです。',
+                    pix: 'Pix',
+                    pixFora: 'ブラジルにお住まいですか？ Pix をどうぞ',
+                    pixTexto: '銀行アプリで読み取るか、コードをコピーしてください。金額は自由です。',
+                    copiar: 'Pix コードをコピー',
+                    copiado: 'コピーしました',
+                    cartao: 'カードまたは PayPal',
+                    kofi: 'Ko-fi で応援する',
+                    paypal: 'PayPal で応援する',
+                    vazio: '応援方法は準備中です。また後でお越しください！',
+                    rodape: 'お支払いは銀行アプリ、Ko-fi、または PayPal で行われます。'
+                },
+                'zh-CN': {
+                    pagina: '支持作者',
+                    titulo: '支持作者',
+                    obrigadoApp: '感谢使用 {app}！',
+                    obrigado: '感谢使用 Vitro！',
+                    texto: 'Vitro 应用由一位独立开发者制作，没有广告，也不收集你的数据。如果它们对你的日常有帮助，任何金额都能帮助项目持续改进。',
+                    nota: '支持完全自愿，不会解锁任何额外内容：应用对所有人都一样。',
+                    pix: 'Pix',
+                    pixFora: '在巴西？使用 Pix',
+                    pixTexto: '用银行 App 扫码，或复制代码。金额由你决定。',
+                    copiar: '复制 Pix 代码',
+                    copiado: '已复制',
+                    cartao: '银行卡或 PayPal',
+                    kofi: '在 Ko-fi 上支持',
+                    paypal: '通过 PayPal 支持',
+                    vazio: '支持方式正在设置中，请稍后再来！',
+                    rodape: '付款在你的银行 App、Ko-fi 或 PayPal 中完成。'
+                }
+            };
+
+            const APPS = ['tasks', 'notes', 'goals', 'mind', 'board', 'bar', 'widgets', 'island', 'focus', 'clip', 'shot', 'suite',
+                'calculator', 'convert', 'ambient', 'wallpapers', 'sound', 'diary', 'money', 'search', 'control'];
+
+            const busca = new URLSearchParams(location.search);
+
+            function escolherIdioma() {
+                const pedidos = [busca.get('lang'), ...(navigator.languages ?? [navigator.language])].filter(Boolean);
+                for (const pedido of pedidos) {
+                    if (TEXTOS[pedido]) return pedido;
+                    const prefixo = pedido.toLowerCase().split('-')[0];
+                    const codigo = Object.keys(TEXTOS).find((chave) => chave.toLowerCase().split('-')[0] === prefixo);
+                    if (codigo) return codigo;
+                }
+                return 'en';
+            }
+
+            const idioma = escolherIdioma();
+            const textos = TEXTOS[idioma];
+            const t = (chave, valores = {}) => textos[chave].replace(/\{(\w+)\}/g, (_, nome) => valores[nome] ?? '');
+
+            document.documentElement.lang = idioma;
+            document.title = `Vitro · ${t('pagina')}`;
+            document.querySelectorAll('[data-t]').forEach((elemento) => {
+                elemento.textContent = t(elemento.dataset.t);
+            });
+
+            const app = APPS.includes(busca.get('app')) ? busca.get('app') : null;
+            const nomeDoApp = app ? `Vitro ${app[0].toUpperCase()}${app.slice(1)}` : null;
+            document.getElementById('obrigado').textContent = nomeDoApp ? t('obrigadoApp', { app: nomeDoApp }) : t('obrigado');
+            if (app) document.getElementById('icone').src = `icones/${app}.png`;
+
+            // Pix "copia e cola" estático (BR Code, padrão EMV do Banco Central), sem valor: quem paga escolhe.
+            function campo(id, valor) {
+                return `${id}${String(valor.length).padStart(2, '0')}${valor}`;
+            }
+
+            function crc16(texto) {
+                let crc = 0xffff;
+                for (let i = 0; i < texto.length; i++) {
+                    crc ^= texto.charCodeAt(i) << 8;
+                    for (let bit = 0; bit < 8; bit++) crc = crc & 0x8000 ? ((crc << 1) ^ 0x1021) & 0xffff : (crc << 1) & 0xffff;
+                }
+                return crc.toString(16).toUpperCase().padStart(4, '0');
+            }
+
+            function semAcentos(texto, limite) {
+                return texto.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^A-Za-z0-9 ]/g, '').toUpperCase().trim().slice(0, limite).trim();
+            }
+
+            function codigoPix({ chave, nome, cidade }) {
+                const base = campo('00', 'br.gov.bcb.pix') + campo('01', chave.trim());
+                const descricao = campo('02', 'Apoio Vitro');
+                const conta = base.length + descricao.length <= 99 ? base + descricao : base;
+                const corpo = campo('00', '01') + campo('26', conta) + campo('52', '0000') + campo('53', '986') + campo('58', 'BR')
+                    + campo('59', semAcentos(nome, 25)) + campo('60', semAcentos(cidade, 15)) + campo('62', campo('05', '***')) + '6304';
+                return corpo + crc16(corpo);
+            }
+
+            const config = window.APOIO ?? {};
+            const pix = config.pix ?? {};
+            // Chave Pix tem no máximo 77 caracteres; maior que isso o código sairia quebrado.
+            const chavePix = (pix.chave ?? '').trim();
+            const temPix = chavePix.length > 0 && chavePix.length <= 77 && Boolean(semAcentos(pix.nome ?? '', 25) && semAcentos(pix.cidade ?? '', 15));
+            const kofi = (config.kofi ?? '').trim();
+            const paypal = (config.paypal ?? '').trim();
+
+            const formaPix = document.getElementById('forma-pix');
+            const formaCartao = document.getElementById('forma-cartao');
+
+            if (temPix) {
+                const codigo = codigoPix(pix);
+                const qr = qrcode(0, 'M');
+                qr.addData(codigo);
+                qr.make();
+                document.getElementById('qr').innerHTML = qr.createSvgTag({ cellSize: 4, margin: 0, scalable: true });
+                document.getElementById('titulo-pix').textContent = idioma === 'pt-BR' ? t('pix') : t('pixFora');
+
+                const copiar = document.getElementById('copiar-pix');
+                copiar.addEventListener('click', async () => {
+                    try {
+                        await navigator.clipboard.writeText(codigo);
+                    } catch {
+                        const campoTexto = Object.assign(document.createElement('textarea'), { value: codigo });
+                        document.body.append(campoTexto);
+                        campoTexto.select();
+                        document.execCommand('copy');
+                        campoTexto.remove();
+                    }
+                    copiar.textContent = t('copiado');
+                    copiar.classList.add('copiado');
+                    setTimeout(() => {
+                        copiar.textContent = t('copiar');
+                        copiar.classList.remove('copiado');
+                    }, 2200);
+                });
+                formaPix.hidden = false;
+            }
+
+            if (kofi) {
+                const link = document.getElementById('link-kofi');
+                link.href = `https://ko-fi.com/${encodeURIComponent(kofi)}`;
+                link.hidden = false;
+            }
+            if (paypal) {
+                const link = document.getElementById('link-paypal');
+                link.href = `https://www.paypal.com/paypalme/${encodeURIComponent(paypal)}`;
+                link.hidden = false;
+            }
+            formaCartao.hidden = !kofi && !paypal;
+
+            // No Brasil o Pix vem primeiro; fora dele, cartão e PayPal.
+            if (idioma !== 'pt-BR') formaPix.before(formaCartao);
+            document.getElementById('vazio').hidden = temPix || !formaCartao.hidden;
+        })();
+    </script>
+</body>
+</html>
